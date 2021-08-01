@@ -1,0 +1,106 @@
+<html>
+  <head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+    <script src="https://unpkg.com/vue"></script>
+
+    <title>snek</title>
+
+    <link rel="icon" href="">
+
+    <style>
+
+    .navbar {
+        margin-bottom: 0px;
+        height: auto;
+        background-color: #f7f7f9;
+    }
+
+    #navbar {
+      font-size: 90%;
+    }
+
+    #game_canvas {
+      height: calc(100% - 150px);
+      max-width: 100%;
+      border: 4px solid #f7f7f9;
+    }
+
+    #game {
+      background-color: auto;
+    }
+
+    .container-fluid {
+      padding: 4px;
+    }
+
+    #profileContainer, #leaderboardContainer {
+      border: 4px solid #f7f7f9;
+      margin-top: 4px;
+    }
+
+    </style>
+  </head>
+
+<body>
+<div id="app">
+
+  <nav class="navbar navbar-light">
+    <div class="d-flex justify-content-between">
+    <!-- Add onclick="clearGame()" to clear game when other button pressed -->
+
+      <div>
+        <button type="button" class="btn btn-outline-primary" v-bind:class="{ active: playNavActive }" @click="playClick" onclick="clearGame()">Play</button>
+      </div>
+
+      <div>
+        <button type="button" class="btn btn-outline-info" v-bind:class="{ active: leaderboardNavActive }" @click="leaderboardClick">Leaderboard</button>
+        <button type="button" class="btn btn-outline-info" v-bind:class="{ active: profileNavActive }" @click="profileClick">Profile</button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Main Div -->
+  <div class="d-flex justify-content-center">
+
+    <!-- Game Div -->
+    <div class="container-fluid" id="game" v-show="showGame">
+      <div class="container-fluid">
+        <button type="button" class="btn btn-outline-success" onclick="start()" @click="showPlayButtons=false, score='Score: 0'" v-if="showPlayButtons">Single Player</button>
+        <button type="button" class="btn btn-outline-success" onclick="start1v1()" @click="showPlayButtons=false, score='P1: 0 P2: 0'" v-if="showPlayButtons">Local Duel</button>
+      </div>
+
+      <div class="container-fluid">
+        <h3 id="score" v-show="!showPlayButtons">{{ score }}</h3>
+        <canvas id="game_canvas" class="rounded" width="1000" height="1000"></canvas>
+      </div>
+    </div>
+
+    <!-- Leaderboard Div -->
+    <div class="container-fluid" id="leaderboardContainer" v-if="leaderboardNavActive">
+    leaderboard
+    </div>
+
+    <!-- Profile Div -->
+    <div class="container-fluid" id="profileContainer" v-if="profileNavActive">
+    profile
+    </div>
+
+  </div>
+
+</div>
+</body>
+
+<script src="app.js"></script>
+<script src="snake.js"></script>
+<script src="snake-duel.js"></script>
+
+</html>
